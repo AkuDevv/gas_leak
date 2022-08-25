@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/widgets/HistoriquePage.dart';
 import 'package:gas_leak_safety/widgets/HomePage.dart';
-import 'package:gas_leak_safety/widgets/ProfilePage.dart';
 import 'package:gas_leak_safety/widgets/login_email_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -102,7 +101,7 @@ class _NavBarState extends State<NavBar> {
                 Navigator.of(context).pop();
               }
               else{
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
+                
               }
             },
           ),

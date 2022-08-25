@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/widgets/AccueilPage.dart';
 import 'package:gas_leak_safety/widgets/HistoriquePage.dart';
-import 'package:gas_leak_safety/widgets/ProfilePage.dart';
 import 'package:gas_leak_safety/widgets/profil_view.dart';
 
 import 'TabBar.dart';
@@ -14,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     return TabBarWidget(
