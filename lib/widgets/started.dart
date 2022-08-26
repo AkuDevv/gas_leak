@@ -36,7 +36,11 @@ class _GettingStartedState extends State<GettingStarted> {
       height: 2.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color: isActive ? /*Color(0xff326789)*/Color(0xff41436a) : Colors.grey,
+        gradient: isActive
+            ? /*Color(0xff326789)*/ LinearGradient(
+                colors: const [Colors.blue, Colors.cyan],
+                stops: const [0.1, 0.9])
+            : LinearGradient(colors: const [Colors.grey, Colors.blueGrey]),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -55,34 +59,50 @@ class _GettingStartedState extends State<GettingStarted> {
                 scrollDirection: Axis.horizontal,
                 controller: _pageController,
                 onPageChanged: (int page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
+                  setState(() {
+                    _currentPage = page;
+                  });
+                },
                 itemCount: slideList.length,
                 itemBuilder: (ctx, i) => SlideItem(i),
               ),
             ),
             Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _buildPageIndicator(),
-              ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildPageIndicator(),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) =>  const LoginScreen()));},
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    color: Color(0xff41436a),
-                    textColor: Colors.white,
-                    child: const Text(
-                      'Rejoinez nous!',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'Sfpro',
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        gradient: LinearGradient(colors: const [
+                          Color.fromARGB(255, 33, 69, 228),
+                          Colors.cyan
+                        ], stops: const [
+                          0.1,
+                          0.9
+                        ])),
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()));
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      color: Colors.transparent,
+                      textColor: Colors.white,
+                      child: const Text(
+                        'Rejoinez nous!',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Sfpro',
+                        ),
                       ),
                     ),
                   ),
@@ -92,10 +112,11 @@ class _GettingStartedState extends State<GettingStarted> {
                       Text(
                         'Vous êtes un pompier ?',
                         style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Sfpro',
-                            color: Color(0xff41436a),
-                      ),),
+                          fontSize: 16,
+                          fontFamily: 'Sfpro',
+                          color: Color.fromARGB(255, 33, 69, 228),
+                        ),
+                      ),
                       FlatButton(
                         onPressed: () {},
                         child: Text(
@@ -103,7 +124,7 @@ class _GettingStartedState extends State<GettingStarted> {
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: 'Sfpro',
-                              color: Color(0xff41436a),
+                              color: Color.fromARGB(255, 33, 69, 228),
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),
                         ),

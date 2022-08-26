@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/models/slide.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class SlideItem extends StatelessWidget {
   final int index;
@@ -24,11 +25,12 @@ class SlideItem extends StatelessWidget {
         const SizedBox(
           height: 18,
         ),
-        Text(
+        GradientText(
+          colors:[Color.fromARGB(255, 33, 65, 243),Colors.cyan],
           slideList[index].title,
           style: const TextStyle(
             fontSize: 22,
-            color: Color(0xff41436a),
+            //color: Color(0xff41436a),
             fontFamily: 'Sfpro',
           ),
         ),
@@ -39,6 +41,7 @@ class SlideItem extends StatelessWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontFamily: 'Sfpro',
+              color: Color.fromARGB(255, 42, 58, 66)
             ),
           ),
         ),

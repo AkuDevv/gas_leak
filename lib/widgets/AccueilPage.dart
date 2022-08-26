@@ -32,7 +32,7 @@ class _AccueilPageState extends State<AccueilPage> {
                     padding: const EdgeInsets.all(2.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.15,
+                      height: MediaQuery.of(context).size.height * 0.12,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -49,12 +49,9 @@ class _AccueilPageState extends State<AccueilPage> {
                               decoration: BoxDecoration(color: Colors.grey),
                             ),
                           ),
-                          GradientText(
+                          const Text(
                             'Solution innovante \net affordable ',
-                            colors: const[
-                                Colors.blue,Colors.purple
-                            ],
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Sfpro',
                                 fontWeight: FontWeight.bold,
@@ -65,7 +62,7 @@ class _AccueilPageState extends State<AccueilPage> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.52,
+                    height: MediaQuery.of(context).size.height * 0.55,
                     child: ListView(
                       scrollDirection: Axis.vertical,
                       children: const [
@@ -90,7 +87,7 @@ class _AccueilPageState extends State<AccueilPage> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(bottom: 5.0, left: 5, right: 5),
+                        const EdgeInsets.only(bottom: 5.0, left: 13, right: 13),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),

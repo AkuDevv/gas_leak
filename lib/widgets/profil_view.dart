@@ -237,17 +237,15 @@ class _ProfileViewState extends State<ProfileView> {
                       Padding(
                         padding: const EdgeInsets.all(5),
                         child:
-                            const Text("Autoriser l'accès à mon emplacement :"),
+                            const Text("Autoriser l'accès à mon emplacement :",style: 
+                            TextStyle(fontFamily: 'Sfpro'),),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5),
                         child: Switch(
                             value: acceptedLocation,
                             onChanged: (bool value) async {
-                              acceptedLocation = true;
-                              Position position =
-                                  await _getGeoLocationPosition();
-                              while (longitude == 0 && latitude == 0) {
+                              /*if(longitude == 0 && latitude == 0) {
                                 showDialog<String>(
                                   context: context,
                                   builder: (BuildContext context) =>
@@ -259,11 +257,14 @@ class _ProfileViewState extends State<ProfileView> {
                                     content: const CircularProgressIndicator(),
                                   ),
                                 );
-                              }
+                              }else{*/
+                                acceptedLocation = true;
+                              Position position =
+                                  await _getGeoLocationPosition();
                               setState(() {
                                 latitude = position.latitude;
                                 longitude = position.longitude;
-                              });
+                              });    
                             }),
                       ),
                     ],
@@ -361,12 +362,12 @@ class _ProfileViewState extends State<ProfileView> {
                             MaterialPageRoute(
                                 builder: (context) => const changePassword()));
                       },
-                      child: GradientText("Changer le mot de passe",
-                          colors: const [Colors.blue, Colors.purple],
+                      child: Text("Changer le mot de passe",
                           style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Sfpro')),
+                              fontSize: 16,
+                              fontFamily: 'Sfpro',
+                              color: Colors.blue[900]
+                              )),
                     ),
                   ),
                   Padding(

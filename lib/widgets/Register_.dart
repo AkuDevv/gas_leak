@@ -410,41 +410,7 @@ class _FirstLandingState extends State<FirstLanding> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: _buildPageIndicator(),
-              ),
-              _currentPage != _numPages - 1
-                  ? Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight,
-                        child: TextButton(
-                          onPressed: () {
-                            _pageController.nextPage(
-                              duration: const Duration(microseconds: 500),
-                              curve: Curves.ease,
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Text(
-                                'Suivant',
-                                style: TextStyle(
-                                  fontFamily: 'Sfpro',
-                                  color: Color(0xff78A6C8),
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Color(0xff78A6C8),
-                                size: 20.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  : Text(''),
+              )
             ],
           ),
         ),
