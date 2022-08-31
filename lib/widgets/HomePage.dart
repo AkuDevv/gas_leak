@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/widgets/AccueilPage.dart';
-import 'package:gas_leak_safety/widgets/HistoriquePage.dart';
+import 'package:gas_leak_safety/widgets/history_view.dart';
 import 'package:gas_leak_safety/widgets/profil_view.dart';
 
 import 'TabBar.dart';
@@ -16,17 +16,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarWidget(
+    return const TabBarWidget(
       title: 'Gas Leak Safety',
-      tabs: const [
+      tabs: [
         Tab(icon: Icon(Icons.home), text: 'Accueil'),
         Tab(icon: Icon(Icons.history), text: 'Historique'),
         Tab(icon: Icon(Icons.person), text: 'Profil'),
       ],
       children: [
-        const AccueilPage(),
-        HistoriquePage(),
-        const ProfileView(),
+        AccueilPage(),
+        HistoryView(),
+        ProfileView(),
       ],
     );
   }

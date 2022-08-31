@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/models/slide.dart';
 import 'package:gas_leak_safety/widgets/login_email_password.dart';
+import 'package:gas_leak_safety/widgets/pompier/login_pompier.dart';
 import 'package:gas_leak_safety/widgets/slidesitem.dart';
 
 class GettingStarted extends StatefulWidget {
@@ -118,7 +119,12 @@ class _GettingStartedState extends State<GettingStarted> {
                         ),
                       ),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPompier()));
+                        },
                         child: Text(
                           'Se connecter',
                           style: TextStyle(
