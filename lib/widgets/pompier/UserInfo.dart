@@ -192,7 +192,7 @@ class _UserInformationsState extends State<UserInformations> {
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: TextButton(
-                      child: Text('Historique'),
+                      child: const Text('Historique'),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: ((context) => HistoriqueUser(uid: widget.uid))));
                       },
