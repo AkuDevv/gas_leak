@@ -5,17 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/widgets/SearchObject.dart';
 
-class HistoryView extends StatefulWidget {
-  const HistoryView({Key? key}) : super(key: key);
+class HistoriqueUser extends StatefulWidget {
+  final String uid;
+  const HistoriqueUser({Key? key, required this.uid}) : super(key: key);
 
   @override
-  State<HistoryView> createState() => _HistoryViewState();
+  State<HistoriqueUser> createState() => _HistoriqueUserState();
 }
 
-class _HistoryViewState extends State<HistoryView> {
+class _HistoriqueUserState extends State<HistoriqueUser> {
   String query = "";
   String test = "";
-  User? user = FirebaseAuth.instance.currentUser;
   TextEditingController searchcontroller = TextEditingController();
 // ignore: prefer_final_fields
   @override
@@ -63,7 +63,7 @@ class _HistoryViewState extends State<HistoryView> {
                 child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('users')
-                        .doc(user!.uid)
+                        .doc(widget.uid)
                         .collection('historiques')
                         .snapshots()
                         .asBroadcastStream(),

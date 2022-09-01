@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/pompier/AccueilPompier.dart';
+import 'package:gas_leak_safety/widgets/pompier/HomePompier.dart';
 
 class LoginPompier extends StatefulWidget {
   const LoginPompier({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class _LoginPompierState extends State<LoginPompier> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AccueilPompier()));
+                                builder: (context) => const HomePompier()));
                       } else {
                         showDialog<String>(
                           context: context,
