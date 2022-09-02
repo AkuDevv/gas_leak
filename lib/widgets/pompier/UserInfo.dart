@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/widgets/pompier/HistoriqueUser.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class UserInformations extends StatefulWidget {
   final String uid;
-  const UserInformations({Key? key,required this.uid}) : super(key: key);
+  const UserInformations({Key? key, required this.uid}) : super(key: key);
 
   @override
   State<UserInformations> createState() => _UserInformationsState();
@@ -17,20 +20,17 @@ class _UserInformationsState extends State<UserInformations> {
   TextEditingController telController = TextEditingController();
   TextEditingController adresseController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  final Completer<GoogleMapController> _controller = Completer();
 
   String? fname = "";
   String? cin = "";
   String? tel = "";
   String? adresse = "";
   String? email = "";
-
   double? longitude = 0;
   double? latitude = 0;
-  bool acceptedLocation = false;
 
   final _formkey = GlobalKey<FormState>();
-
-  bool showPassword = true;
 
   Future _getUserFromFirebase() async {
     await FirebaseFirestore.instance
@@ -45,6 +45,8 @@ class _UserInformationsState extends State<UserInformations> {
           tel = snapshot.data()!['tel'];
           adresse = snapshot.data()!['adresse'];
           email = snapshot.data()!['email'];
+          longitude = snapshot.data()!['longitude'];
+          latitude = snapshot.data()!['latitude'];
         });
       }
     });
@@ -74,7 +76,7 @@ class _UserInformationsState extends State<UserInformations> {
                     padding: const EdgeInsets.only(left: 20, bottom: 4),
                     child: GradientText(
                       'Nom & Prénom :',
-                      style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
+                      style: const TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
                       colors: const [Colors.purple, Colors.blue],
@@ -104,7 +106,7 @@ class _UserInformationsState extends State<UserInformations> {
                         const EdgeInsets.only(left: 20, bottom: 4, top: 10),
                     child: GradientText(
                       'CIN :',
-                      style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
+                      style: const TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
                       colors: const [Colors.purple, Colors.blue],
@@ -135,7 +137,7 @@ class _UserInformationsState extends State<UserInformations> {
                         const EdgeInsets.only(left: 20, bottom: 4, top: 10),
                     child: GradientText(
                       'Téléphone :',
-                      style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
+                      style: const TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
                       colors: const [Colors.purple, Colors.blue],
@@ -165,7 +167,7 @@ class _UserInformationsState extends State<UserInformations> {
                         const EdgeInsets.only(left: 20, bottom: 4, top: 10),
                     child: GradientText(
                       'Adresse :',
-                      style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
+                      style: const TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
                       colors: const [Colors.purple, Colors.blue],
@@ -194,10 +196,26 @@ class _UserInformationsState extends State<UserInformations> {
                     child: TextButton(
                       child: const Text('Historique'),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: ((context) => HistoriqueUser(uid: widget.uid))));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) =>
+                                    HistoriqueUser(uid: widget.uid))));
                       },
                     ),
-                  )
+                  ),
+                  Container(
+                      height: 400,
+                      width: MediaQuery.of(context).size.width,
+                      child: GoogleMap(
+                          initialCameraPosition: CameraPosition(
+                              target: LatLng(latitude!, longitude!),
+                              zoom: 14.5),
+                          markers: {
+                            Marker(
+                                markerId: const MarkerId('Position'),
+                                position: LatLng(latitude!, longitude!))
+                          })),
                 ],
               ),
             ),

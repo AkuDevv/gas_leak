@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
+        padding: const EdgeInsets.fromLTRB(20, 70, 20, 10),
         child: Form(
           key: _formkey,
           child: ListView(
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.height/2,
                   height: 150,
-                  child: Image.asset("assets/images/login.png"),
+                  child: Image.asset("assets/images/logo_.png"),
                 ),
               ),
 
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (context) =>
                                 const ForgotPasswordScreen()));
                   },
-                  child: const Text("Mot de passe oublié?",style: TextStyle(fontFamily: 'Sfpro'),)),
+                  child: const Text("Mot de passe oublié?",style: TextStyle(fontFamily: 'Sfpro',color: Color(0xff00366f)),)),
 
               // FORGOT PASSWORD BUTTON
 
@@ -118,34 +118,44 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 40,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (!_formkey.currentState!.validate()) {
-                              return;
-                            }
-                            setState(() {
-                              login = true;
-                            });
-                            User? res = await AuthService().login(
-                                emailController.text,
-                                passwordController.text,
-                                context);
-                            if (res != null) {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VerifyEmailScreen()),
-                                  (route) => false);
-                            }
-                            setState(() {
-                              login = false;
-                            });
-                          },
-                          child: const Text(
-                            "Se Connecter",
-                            style: TextStyle(
-                                fontSize: 20,fontFamily: 'Sfpro'),
+                        child: Container(
+                          decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        gradient: const LinearGradient(colors:  [
+                          Color(0xff00366f),Color(0xffd51b33)
+                        ], stops: [
+                          0.1,
+                          0.9
+                        ])),
+                          child: TextButton(
+                            onPressed: () async {
+                              if (!_formkey.currentState!.validate()) {
+                                return;
+                              }
+                              setState(() {
+                                login = true;
+                              });
+                              User? res = await AuthService().login(
+                                  emailController.text,
+                                  passwordController.text,
+                                  context);
+                              if (res != null) {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const VerifyEmailScreen()),
+                                    (route) => false);
+                              }
+                              setState(() {
+                                login = false;
+                              });
+                            },
+                            child: const Text(
+                              "Se Connecter",
+                              style: TextStyle(
+                                  fontSize: 20,fontFamily: 'Sfpro',color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -154,14 +164,14 @@ class _LoginScreenState extends State<LoginScreen> {
               // REGISTER BUTTON
               TextButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const FirstLanding()));
                   },
                   child: const Text(
                     "Vous n'avez pas du compte? S'inscrire ici!",
-                    style: TextStyle(fontSize: 15,fontFamily: 'Sfpro'),
+                    style: TextStyle(fontSize: 15,fontFamily: 'Sfpro',color: Color(0xff00366f)),
                   ))
             ],
           ),

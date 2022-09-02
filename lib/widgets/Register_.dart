@@ -52,7 +52,7 @@ class _FirstLandingState extends State<FirstLanding> {
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xff78A6C8) : Colors.grey,
+        color: isActive ? const Color(0xff00366f) : Colors.grey,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -62,35 +62,41 @@ class _FirstLandingState extends State<FirstLanding> {
   Widget build(BuildContext context) {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Color(0xff00366f)),
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: <Widget>[
               Center(
                 child: SizedBox(
                   width: 110,
                   height: 110,
-                  child: Image.asset("assets/images/logo_gas.png"),
+                  child: Image.asset("assets/images/logo_.png"),
                 ),
               ),
               const Center(
                 child: Text(
                   "Créer votre compte",
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Color(0xff78A6C8),
-                      fontFamily: 'Sfpro',
-                      fontWeight: FontWeight.bold),
+                    fontSize: 25,
+                    color: Color(0xff00366f),
+                    fontFamily: 'Sfpro',
+                  ),
                 ),
               ),
               Container(
-                height: 400.0,
+                height: 400,
                 child: Form(
                   key: _formkey,
                   child: PageView(
+                    allowImplicitScrolling: true,
+                    pageSnapping: true,
                     physics: const ClampingScrollPhysics(),
                     controller: _pageController,
                     onPageChanged: (int page) {
@@ -101,13 +107,12 @@ class _FirstLandingState extends State<FirstLanding> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: ListView(
                           children: <Widget>[
                             const SizedBox(
                               height: 20,
                             ),
-
+              
                             // FIRST NAME TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -127,7 +132,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-
+              
                             // LAST NAME TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -147,7 +152,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-
+              
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
@@ -166,7 +171,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-
+              
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
@@ -185,7 +190,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-
+              
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
@@ -208,10 +213,13 @@ class _FirstLandingState extends State<FirstLanding> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(40.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
@@ -236,7 +244,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                 autofillHints: const [AutofillHints.email],
                               ),
                             ),
-
+              
                             // PASSWORD TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(4.0),
@@ -276,7 +284,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                                 Icons.visibility_off))),
                               ),
                             ),
-
+              
                             // CONFIRM PASSWORD TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -312,77 +320,89 @@ class _FirstLandingState extends State<FirstLanding> {
                                                 Icons.visibility_off))),
                               ),
                             ),
-
+              
                             // REGISTER BUTTON
                             loading
                                 ? const Padding(
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Center(
                                       child: CircularProgressIndicator(),
                                     ),
                                   )
                                 : Padding(
-                                    padding: const EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       height: 40,
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all( const Color(0xff78A6C8))
-                                        ),
-                                          onPressed: () async {
-                                            if (!_formkey.currentState!
-                                                    .validate() ==
-                                                true) {
-                                              return;
-                                            }
-                                            setState(() {
-                                              loading = true;
-                                            });
-                                            User? user = await AuthService()
-                                                .register(
-                                                    emailController.text,
-                                                    passwordController.text,
-                                                    context);
-                                            if (user != null) {
-                                              CollectionReference users =
-                                                  firebaseFirestore
-                                                      .collection('users');
-                                              await users.doc(user.uid).set({
-                                                'name':
-                                                    "${fnameController.text} ${lnameController.text}",
-                                                'email': emailController.text,
-                                                'cin': cinController.text,
-                                                'tel': telController.text,
-                                                'adresse':
-                                                    adresseController.text,
-                                                'photo': "",
-                                                'uid': user.uid,
-                                                'provider': "EMAIL",
-                                                'password' : passwordController.text,
-
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                            gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xff00366f),
+                                                  Color(0xffd51b33)
+                                                ],
+                                                stops: [
+                                                  0.1,
+                                                  0.9
+                                                ])),
+                                        child: TextButton(
+                                            onPressed: () async {
+                                              if (!_formkey.currentState!
+                                                      .validate() ==
+                                                  true) {
+                                                return;
+                                              }
+                                              setState(() {
+                                                loading = true;
                                               });
-                                              // ignore: use_build_context_synchronously
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const VerifyEmailScreen()));
-                                            }
-                                            setState(() {
-                                              loading = false;
-                                            });
-                                          },
-                                          child: const Text(
-                                            "S'inscrire",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontFamily: 'Sfpro',
-                                            ),
-                                          )),
+                                              User? user = await AuthService()
+                                                  .register(
+                                                      emailController.text,
+                                                      passwordController.text,
+                                                      context);
+                                              if (user != null) {
+                                                CollectionReference users =
+                                                    firebaseFirestore
+                                                        .collection('users');
+                                                await users.doc(user.uid).set({
+                                                  'name':
+                                                      "${fnameController.text} ${lnameController.text}",
+                                                  'email': emailController.text,
+                                                  'cin': cinController.text,
+                                                  'tel': telController.text,
+                                                  'adresse':
+                                                      adresseController.text,
+                                                  'photo': "",
+                                                  'uid': user.uid,
+                                                  'provider': "EMAIL",
+                                                  'password':
+                                                      passwordController.text,
+                                                });
+                                                // ignore: use_build_context_synchronously
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const VerifyEmailScreen()));
+                                              }
+                                              setState(() {
+                                                loading = false;
+                                              });
+                                            },
+                                            child: const Text(
+                                              "S'inscrire",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontFamily: 'Sfpro',
+                                              ),
+                                            )),
+                                      ),
                                     ),
                                   ),
-
+              
                             // LOGIN BUTTON
                             Center(
                               child: TextButton(
@@ -396,8 +416,8 @@ class _FirstLandingState extends State<FirstLanding> {
                                 child: const Text("Vous avez déja un compte?",
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0xff78A6C8),
-                                        fontWeight: FontWeight.bold)),
+                                        color: Color(0xff00366f),
+                                        )),
                               ),
                             )
                           ],

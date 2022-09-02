@@ -92,7 +92,7 @@ class _AccueilPageState extends State<AccueilPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         gradient: const LinearGradient(
-                          colors: [Colors.blue,Colors.purple],
+                          colors: [Color(0xff00366f),Color(0xffd51b33)],
                           stops: [0.1,0.9]
                         )
                       ),

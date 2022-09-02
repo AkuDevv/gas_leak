@@ -119,7 +119,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Colors.purple, Colors.blue],
+                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
                     ),
                   ),
                   // FIRST NAME TEXT FIELD
@@ -149,7 +149,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Colors.purple, Colors.blue],
+                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
                     ),
                   ),
                   //CIN FIELD
@@ -180,7 +180,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Colors.purple, Colors.blue],
+                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
                     ),
                   ),
 
@@ -210,7 +210,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Colors.purple, Colors.blue],
+                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
                     ),
                   ),
 
@@ -276,7 +276,7 @@ class _ProfileViewState extends State<ProfileView> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           gradient: LinearGradient(
-                              colors: const [Colors.blue, Colors.purple],
+                              colors: const [Color(0xff00366f),Color(0xffd51b33)],
                               stops: const [0.1, 0.9])),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.06,
@@ -366,7 +366,7 @@ class _ProfileViewState extends State<ProfileView> {
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: 'Sfpro',
-                              color: Colors.blue[900]
+                              color: Color(0xff00366f)
                               )),
                     ),
                   ),

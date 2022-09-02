@@ -39,7 +39,7 @@ class _GettingStartedState extends State<GettingStarted> {
       decoration: BoxDecoration(
         gradient: isActive
             ? /*Color(0xff326789)*/ LinearGradient(
-                colors: const [Colors.blue, Colors.cyan],
+                colors: const [Color(0xff00366f),Color(0xffd51b33)],
                 stops: const [0.1, 0.9])
             : LinearGradient(colors: const [Colors.grey, Colors.blueGrey]),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -81,8 +81,7 @@ class _GettingStartedState extends State<GettingStarted> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         gradient: LinearGradient(colors: const [
-                          Color.fromARGB(255, 33, 69, 228),
-                          Colors.cyan
+                          Color(0xff00366f),Color(0xffd51b33)
                         ], stops: const [
                           0.1,
                           0.9
@@ -115,7 +114,7 @@ class _GettingStartedState extends State<GettingStarted> {
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Sfpro',
-                          color: Color.fromARGB(255, 33, 69, 228),
+                          color: Color(0xff00366f),
                         ),
                       ),
                       FlatButton(
@@ -130,7 +129,7 @@ class _GettingStartedState extends State<GettingStarted> {
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: 'Sfpro',
-                              color: Color.fromARGB(255, 33, 69, 228),
+                              color: Color(0xff00366f),
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),
                         ),

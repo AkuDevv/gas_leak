@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gas_leak_safety/widgets/pompier/Visite_profil.dart';
 import 'UserInfo.dart';
 
 class HomePompier extends StatefulWidget {
@@ -115,7 +116,7 @@ class _HomePompierState extends State<HomePompier> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  UserInformations(uid : uid)));
+                                                  ProfileScreen(uid : uid)));
                                     },
                                     title: Text(
                                       name,

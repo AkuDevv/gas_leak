@@ -79,7 +79,7 @@ class _changePasswordState extends State<changePassword> {
             Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: const [Colors.blue, Colors.purple],
+                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
                       stops: const [0.2, 0.9])),
               child: AppBar(
                 backgroundColor: Colors.transparent,
@@ -104,7 +104,7 @@ class _changePasswordState extends State<changePassword> {
                 child: Container(
                   width: 150,
                   height: 150,
-                  child: Image.asset("assets/images/login.png"),
+                  child: Image.asset("assets/images/logo_.png"),
                 ),
               ),
             ),
@@ -212,7 +212,7 @@ class _changePasswordState extends State<changePassword> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     gradient: LinearGradient(
-                        colors: const [Colors.blue, Colors.purple],
+                        colors: const [Color(0xff00366f),Color(0xffd51b33)],
                         stops: const [0.1, 0.9])),
                 // ignore: deprecated_member_use
                 child: RaisedButton(
