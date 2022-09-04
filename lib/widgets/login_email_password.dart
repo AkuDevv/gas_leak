@@ -30,8 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Color(0xff00366f)),
+        elevation: 0,
+      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 70, 20, 10),
+        padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
         child: Form(
           key: _formkey,
           child: ListView(

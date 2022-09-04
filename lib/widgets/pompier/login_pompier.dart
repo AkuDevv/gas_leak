@@ -27,7 +27,7 @@ class _LoginPompierState extends State<LoginPompier> {
               SizedBox(
                 width: 180,
                 height: 180,
-                child: Image.asset("assets/images/login.png"),
+                child: Image.asset("assets/images/logo_.png"),
               ),
 
               const SizedBox(
@@ -59,11 +59,10 @@ class _LoginPompierState extends State<LoginPompier> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 10, 45, 161),
-                        Colors.cyan
+                        Color(0xff00366f),Color(0xffd51b33)
                       ], stops: [
-                        0.1,
-                        0.9
+                        0.4,
+                        0.8
                       ])),
                   child: TextButton(
                     onPressed: () {

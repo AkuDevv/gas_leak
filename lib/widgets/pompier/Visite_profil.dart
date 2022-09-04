@@ -59,41 +59,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Scaffold(
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 73),
-              child: Column(
-                children: [
-                  Row(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15,right: 15,top: 50,bottom: 30),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Icon(
-                        Icons.arrow_left,
-                        color: Colors.black,
-                      ),
-                      Icon(
-                        Icons.logout,
-                        color: Colors.black,
+                      IconButton(
+                        onPressed:(){ Navigator.pop(context);},
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  fname!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 34,
+                    fontFamily: 'Sfpro',
                   ),
-                  Text(
-                    fname!,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 34,
-                      fontFamily: 'Sfpro',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 22,
-                  ),
-                  Container(
-                    height: height * 0.43,
+                ),
+                SizedBox(
+                  height: 22,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Container(
+                    height: height * 0.5,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
@@ -134,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Orders',
+                                              'Tel: ${tel!}',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Sfpro',
@@ -161,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Pending',
+                                              'CIN: ${cin!}',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Sfpro',
@@ -172,19 +174,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                       ],
                                     ),
-                                    Text('hhhhhh'),
                                     Padding(
                                       padding: const EdgeInsets.all(8),
-                                      child: TextButton(
-                                        child: const Text('Historique'),
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: ((context) =>
-                                                      HistoriqueUser(
-                                                          uid: widget.uid))));
-                                        },
+                                      child: Text(
+                                        adresse!,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.grey[700],
+                                          fontFamily: 'Sfpro',
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(14),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        child: TextButton(
+                                          child: Text(
+                                            'Historique',
+                                            style: TextStyle(
+                                              color: Colors.grey[700],
+                                              fontFamily: 'Sfpro',
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: ((context) =>
+                                                        HistoriqueUser(
+                                                            uid: widget.uid))));
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -208,25 +237,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                     ),
                   ),
-                  // ignore: prefer_const_constructors
-                  SizedBox(
-                    height: 30,
-                  ),
-                  (longitude! == 0 || latitude! == 0) ? CircularProgressIndicator():
-                  Container(
-                      height: 400,
-                      width: MediaQuery.of(context).size.width,
-                      child: GoogleMap(
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(latitude!, longitude!),
-                              zoom: 14.5),
-                          markers: {
-                            Marker(
-                                markerId: const MarkerId('Position'),
-                                position: LatLng(latitude!, longitude!))
-                          })),
-                ],
-              ),
+                ),
+                // ignore: prefer_const_constructors
+                SizedBox(
+                  height: 30,
+                ),
+                (longitude! == 0 || latitude! == 0)
+                    ? CircularProgressIndicator()
+                    : Container(
+                        height: 750,
+                        width: width,
+                        child: GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                                target: LatLng(latitude!, longitude!),
+                                zoom: 14.5),
+                            markers: {
+                              Marker(
+                                  markerId: const MarkerId('Position'),
+                                  position: LatLng(latitude!, longitude!))
+                            })),
+              ],
             ),
           ),
         )

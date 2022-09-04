@@ -22,12 +22,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     user = auth.currentUser;
     user!.sendEmailVerification();
 
-    timer = Timer.periodic(
-      const Duration(seconds: 2), 
-      (timer) {
-        checkEmailVerified();
-      }
-    );
+    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      checkEmailVerified();
+    });
   }
 
   @override
@@ -39,23 +36,38 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Email Verfication"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text("Please check your email and verify your account! ${user!.email}"),
-      ),
-    );
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: const Text(
+            "Verfication",
+            style: TextStyle(color: Color(0xff00366f), fontFamily: 'Sfpro'),
+          ),
+          iconTheme: const IconThemeData(color: Color(0xff00366f)),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 150,left: 20,right: 20),
+          child: Column(
+            children: [
+              const CircularProgressIndicator(
+                color: Color(0xff00366f),
+              ),
+              const SizedBox(height: 15,),
+              Center(child: Text("Veuillez consulter votre boite mail/spam: ${user!.email}",textAlign: TextAlign.center,))
+            ],
+          ),
+        ));
   }
 
   Future<void> checkEmailVerified() async {
     user = auth.currentUser;
     await user!.reload();
-    if(user!.emailVerified) {
+    if (user!.emailVerified) {
       timer!.cancel();
       // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
   }
 }

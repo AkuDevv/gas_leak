@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +34,7 @@ class _ProfileViewState extends State<ProfileView> {
   double? longitude = 0;
   double? latitude = 0;
   bool acceptedLocation = false;
+  bool loading = false;
 
   String message = "";
 
@@ -242,30 +245,23 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5),
-                        child: Switch(
-                            value: acceptedLocation,
-                            onChanged: (bool value) async {
-                              /*if(longitude == 0 && latitude == 0) {
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                    title: const Text(
-                                      'Veuillez Patienter...',
-                                      style: TextStyle(fontFamily: 'Sfpro'),
-                                    ),
-                                    content: const CircularProgressIndicator(),
-                                  ),
-                                );
-                              }else{*/
-                                acceptedLocation = true;
+                        child: 
+                        loading == true ?
+                        CircularProgressIndicator()
+                        :TextButton(
+                          child: acceptedLocation == false ?  Text('Autoriser',style: TextStyle(color: Color(0xff00366f)),) : Text('Autorisé',style: TextStyle(color: Colors.green),),
+                            onPressed: () async{
+                              loading = true; //ignore
                               Position position =
                                   await _getGeoLocationPosition();
-                              setState(() {
+                              setState((){
+                                acceptedLocation = true;
                                 latitude = position.latitude;
                                 longitude = position.longitude;
-                              });    
-                            }),
+                                loading = false;
+                              }); 
+                            }
+                            ),
                       ),
                     ],
                   ),

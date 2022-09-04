@@ -26,6 +26,12 @@ class _HistoriqueUserState extends State<HistoriqueUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Historique',style: TextStyle(color: Colors.black,fontFamily: 'Sfpro'),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Center(

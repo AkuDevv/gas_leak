@@ -91,11 +91,6 @@ class _changePasswordState extends State<changePassword> {
                     fontSize: 20,
                   ),
                 ),
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () => Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ProfileView())),
-                ),
               ),
             ),
             Padding(

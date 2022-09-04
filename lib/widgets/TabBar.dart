@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gas_leak_safety/widgets/started.dart';
 
 class TabBarWidget extends StatelessWidget {
   final String title;
@@ -17,14 +19,33 @@ class TabBarWidget extends StatelessWidget {
         length: tabs.length,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(title,style: const TextStyle(
-              fontFamily: 'Sfpro',
-            ),),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right:15.0,top: 5),
+                child: IconButton(
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const GettingStarted()),
+                        (route) => false);
+                  },
+                  icon: const Icon(Icons.logout),
+                ),
+              )
+            ],
+            title: Text(
+              title,
+              style: const TextStyle(
+                fontFamily: 'Sfpro',
+              ),
+            ),
             centerTitle: true,
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xff00366f),Color(0xffd51b33)],
+                  colors: [Color(0xff00366f), Color(0xffd51b33)],
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                 ),

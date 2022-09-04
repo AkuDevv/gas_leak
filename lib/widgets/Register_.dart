@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gas_leak_safety/widgets/login_email_password.dart';
 import 'package:gas_leak_safety/widgets/signIn.dart';
 import 'package:gas_leak_safety/widgets/verify_email.dart';
 import 'package:gas_leak_safety/services/auth_service.dart';
@@ -374,6 +375,8 @@ class _FirstLandingState extends State<FirstLanding> {
                                                   'tel': telController.text,
                                                   'adresse':
                                                       adresseController.text,
+                                                  'latitude' : 0,
+                                                  'longitude' : 0,
                                                   'photo': "",
                                                   'uid': user.uid,
                                                   'provider': "EMAIL",
@@ -411,11 +414,12 @@ class _FirstLandingState extends State<FirstLanding> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const SignInMethodScreen()));
+                                              const LoginScreen()));
                                 },
                                 child: const Text("Vous avez déja un compte?",
                                     style: TextStyle(
                                         fontSize: 15,
+                                        fontFamily: 'Sfpro',
                                         color: Color(0xff00366f),
                                         )),
                               ),

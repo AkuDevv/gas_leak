@@ -28,10 +28,10 @@ class _SearchObjectState extends State<SearchObject> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children:  [
-                  const Icon(Icons.calendar_month,color: Colors.blueAccent,),
+                  const Icon(Icons.calendar_month,color: Color(0xff00366f),),
                   Padding(
                     padding: const EdgeInsets.all(3.0),
-                    child: Text(widget.date,style: const TextStyle(fontFamily: 'Sfpro',color: Colors.blueAccent),),
+                    child: Text(widget.date,style: const TextStyle(fontFamily: 'Sfpro',color: Color(0xff00366f)),),
                   ),
                   const Padding(
                     padding: EdgeInsets.all(1.0),
@@ -39,7 +39,7 @@ class _SearchObjectState extends State<SearchObject> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(3.0),
-                    child: Text(widget.heure, style: const TextStyle(fontFamily: 'Sfpro',color: Colors.blueAccent),),
+                    child: Text(widget.heure, style: const TextStyle(fontFamily: 'Sfpro',color: Color(0xff00366f)),),
                   ),
                 ],
               ),
