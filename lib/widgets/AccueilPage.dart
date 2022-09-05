@@ -62,7 +62,7 @@ class _AccueilPageState extends State<AccueilPage> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.55,
+                    height: MediaQuery.of(context).size.height * 0.56,
                     child: ListView(
                       scrollDirection: Axis.vertical,
                       children: const [
@@ -85,10 +85,15 @@ class _AccueilPageState extends State<AccueilPage> {
                       ],
                     ),
                   ),
-                  Padding(
+                ],
+              ),
+            ),
+          ),
+          floatingActionButton: Padding(
                     padding:
-                        const EdgeInsets.only(bottom: 5.0, left: 13, right: 13),
+                        const EdgeInsets.only(left: 13, right: 13),
                     child: Container(
+                      width: MediaQuery.of(context).size.width*0.855,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         gradient: const LinearGradient(
@@ -96,25 +101,18 @@ class _AccueilPageState extends State<AccueilPage> {
                           stops: [0.1,0.9]
                         )
                       ),
-                      child: FloatingActionButton.extended(
-                        elevation: 0,
+                      child: TextButton(
                         onPressed: () {
                           _service.call('0697545209');
                         },
-                        label: const Text(
+                        child: const Text(
                           'Contactez Nous!',
                           style: TextStyle(
-                              fontFamily: 'Sfpro', fontWeight: FontWeight.bold),
+                              fontFamily: 'Sfpro', fontWeight: FontWeight.bold,color: Colors.white),
                         ),
-                        icon: const Icon(Icons.call),
-                        backgroundColor: Colors.transparent
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
         );
   }
 }

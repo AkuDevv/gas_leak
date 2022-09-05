@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gas_leak_safety/widgets/HomePage.dart';
 import 'package:gas_leak_safety/widgets/Register_.dart';
 import 'package:gas_leak_safety/widgets/forgot_password.dart';
 import 'package:gas_leak_safety/widgets/verify_email.dart';
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
+        padding: const EdgeInsets.fromLTRB(20, 35, 20, 10),
         child: Form(
           key: _formkey,
           child: ListView(
@@ -149,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const VerifyEmailScreen()),
+                                            const HomePage()),
                                     (route) => false);
                               }
                               setState(() {

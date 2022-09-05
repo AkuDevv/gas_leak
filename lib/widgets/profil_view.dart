@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gas_leak_safety/widgets/changePassword.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:load_switch/load_switch.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class ProfileView extends StatefulWidget {
@@ -34,9 +35,14 @@ class _ProfileViewState extends State<ProfileView> {
   double? longitude = 0;
   double? latitude = 0;
   bool acceptedLocation = false;
-  bool loading = false;
+  bool? loading = false;
 
   String message = "";
+
+  Future<bool> getLoading() async {
+    await Future.delayed(const Duration(seconds: 4));
+    return !acceptedLocation;
+  }
 
   Future<Position> _getGeoLocationPosition() async {
     bool serviceEnabled;
@@ -122,7 +128,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
+                      colors: const [Color(0xff00366f), Color(0xffd51b33)],
                     ),
                   ),
                   // FIRST NAME TEXT FIELD
@@ -134,6 +140,7 @@ class _ProfileViewState extends State<ProfileView> {
                       textInputAction: TextInputAction.next,
                       style: const TextStyle(fontSize: 15, fontFamily: 'Sfpro'),
                       decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person),
                           hintText: fname,
                           labelStyle: const TextStyle(
                               fontSize: 14, fontFamily: 'Sfpro'),
@@ -152,7 +159,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
+                      colors: const [Color(0xff00366f), Color(0xffd51b33)],
                     ),
                   ),
                   //CIN FIELD
@@ -165,6 +172,7 @@ class _ProfileViewState extends State<ProfileView> {
                       textInputAction: TextInputAction.next,
                       style: const TextStyle(fontSize: 15, fontFamily: 'Sfpro'),
                       decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.badge),
                           hintText: cin,
                           labelStyle: const TextStyle(
                               fontSize: 14, fontFamily: 'Sfpro'),
@@ -183,7 +191,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
+                      colors: const [Color(0xff00366f), Color(0xffd51b33)],
                     ),
                   ),
 
@@ -195,6 +203,7 @@ class _ProfileViewState extends State<ProfileView> {
                       textInputAction: TextInputAction.next,
                       style: const TextStyle(fontSize: 15, fontFamily: 'Sfpro'),
                       decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.phone),
                           hintText: tel,
                           labelStyle: const TextStyle(
                               fontSize: 14, fontFamily: 'Sfpro'),
@@ -213,7 +222,7 @@ class _ProfileViewState extends State<ProfileView> {
                       style: TextStyle(fontFamily: 'Sfpro', fontSize: 16),
                       gradientType: GradientType.radial,
                       radius: 14,
-                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
+                      colors: const [Color(0xff00366f), Color(0xffd51b33)],
                     ),
                   ),
 
@@ -225,6 +234,7 @@ class _ProfileViewState extends State<ProfileView> {
                       textInputAction: TextInputAction.next,
                       style: const TextStyle(fontSize: 15, fontFamily: 'Sfpro'),
                       decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.home),
                           hintText: adresse,
                           labelStyle: const TextStyle(
                               fontSize: 14, fontFamily: 'Sfpro'),
@@ -238,30 +248,48 @@ class _ProfileViewState extends State<ProfileView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(5),
-                        child:
-                            const Text("Autoriser l'accès à mon emplacement :",style: 
-                            TextStyle(fontFamily: 'Sfpro'),),
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                          "Autoriser l'accès à mon emplacement :",
+                          style: TextStyle(
+                              fontFamily: 'Sfpro', color: Color(0xff00366f)),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: 
-                        loading == true ?
-                        CircularProgressIndicator()
-                        :TextButton(
-                          child: acceptedLocation == false ?  Text('Autoriser',style: TextStyle(color: Color(0xff00366f)),) : Text('Autorisé',style: TextStyle(color: Colors.green),),
-                            onPressed: () async{
-                              loading = true; //ignore
+                        padding: const EdgeInsets.all(10),
+                        child: LoadSwitch(
+                            width: 40,
+                            height: 20,
+                            future: getLoading,
+                            value: acceptedLocation,
+                            onTap: (value) {
+                              print(value);
+                            },
+                            onChange: (value) async {
                               Position position =
                                   await _getGeoLocationPosition();
-                              setState((){
-                                acceptedLocation = true;
+                              setState(() {
+                                acceptedLocation = value;
                                 latitude = position.latitude;
                                 longitude = position.longitude;
-                                loading = false;
-                              }); 
-                            }
-                            ),
+                              });
+                              if (user != null) {
+                                CollectionReference users =
+                                    firebaseFirestore.collection('users');
+                                await users.doc(user!.uid).update({
+                                  'name': fname,
+                                  'email': email,
+                                  'cin': cin,
+                                  'tel': tel,
+                                  'adresse': adresse,
+                                  'photo': "",
+                                  'uid': user!.uid,
+                                  'provider': "EMAIL",
+                                  'latitude': latitude == 0 ? 0 : latitude,
+                                  'longitude': longitude == 0 ? 0 : longitude,
+                                });
+                              }
+                            }),
                       ),
                     ],
                   ),
@@ -271,9 +299,13 @@ class _ProfileViewState extends State<ProfileView> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          gradient: LinearGradient(
-                              colors: const [Color(0xff00366f),Color(0xffd51b33)],
-                              stops: const [0.1, 0.9])),
+                          gradient: LinearGradient(colors: const [
+                            Color(0xff00366f),
+                            Color(0xffd51b33)
+                          ], stops: const [
+                            0.1,
+                            0.9
+                          ])),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.06,
                       child: RaisedButton(
@@ -289,7 +321,7 @@ class _ProfileViewState extends State<ProfileView> {
                             if (user != null) {
                               CollectionReference users =
                                   firebaseFirestore.collection('users');
-                              await users.doc(user!.uid).set({
+                              await users.doc(user!.uid).update({
                                 'name': fnameController.text == ""
                                     ? fname
                                     : fnameController.text,
@@ -306,10 +338,10 @@ class _ProfileViewState extends State<ProfileView> {
                                     ? adresse
                                     : adresseController.text,
                                 'photo': "",
+                                'uid': user!.uid,
+                                'provider': "EMAIL",
                                 'latitude': latitude == 0 ? 0 : latitude,
                                 'longitude': longitude == 0 ? 0 : longitude,
-                                'uid': user!.uid,
-                                'provider': "EMAIL"
                               }).then((value) => showDialog<String>(
                                         context: context,
                                         builder: (BuildContext context) =>
@@ -362,8 +394,7 @@ class _ProfileViewState extends State<ProfileView> {
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: 'Sfpro',
-                              color: Color(0xff00366f)
-                              )),
+                              color: Color(0xff00366f))),
                     ),
                   ),
                   Padding(

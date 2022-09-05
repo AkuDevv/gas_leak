@@ -113,11 +113,14 @@ class _FirstLandingState extends State<FirstLanding> {
                             const SizedBox(
                               height: 20,
                             ),
-              
+
                             // FIRST NAME TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
+                                validator: (fname) => fname!.isEmpty
+                                    ? "Entrez votre prénom!"
+                                    : null,
                                 controller: fnameController,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
@@ -133,11 +136,13 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-              
+
                             // LAST NAME TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
+                                validator: (name) =>
+                                    name!.isEmpty ? "Entrez votre nom!" : null,
                                 controller: lnameController,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
@@ -153,10 +158,12 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-              
+
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
+                                validator: (cin) =>
+                                    cin!.isEmpty ? "Entrez votre CIN!" : null,
                                 controller: cinController,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
@@ -172,10 +179,13 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-              
+
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
+                                validator: (tel) => tel!.isEmpty
+                                    ? "Entrez votre numéro de téléphone"
+                                    : null,
                                 controller: telController,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
@@ -191,10 +201,13 @@ class _FirstLandingState extends State<FirstLanding> {
                                     contentPadding: const EdgeInsets.all(10)),
                               ),
                             ),
-              
+
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
+                                validator: (adresse) => adresse!.isEmpty
+                                    ? "Entrez votre adresse!"
+                                    : null,
                                 controller: adresseController,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
@@ -245,7 +258,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                 autofillHints: const [AutofillHints.email],
                               ),
                             ),
-              
+
                             // PASSWORD TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(4.0),
@@ -285,7 +298,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                                 Icons.visibility_off))),
                               ),
                             ),
-              
+
                             // CONFIRM PASSWORD TEXT FIELD
                             Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -321,7 +334,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                                 Icons.visibility_off))),
                               ),
                             ),
-              
+
                             // REGISTER BUTTON
                             loading
                                 ? const Padding(
@@ -375,14 +388,24 @@ class _FirstLandingState extends State<FirstLanding> {
                                                   'tel': telController.text,
                                                   'adresse':
                                                       adresseController.text,
-                                                  'latitude' : 0,
-                                                  'longitude' : 0,
+                                                  'latitude': 0,
+                                                  'longitude': 0,
                                                   'photo': "",
                                                   'uid': user.uid,
                                                   'provider': "EMAIL",
                                                   'password':
                                                       passwordController.text,
-                                                });
+                                                }).then((value) =>
+                                                    users
+                                                        .doc(user.uid)
+                                                        .collection(
+                                                            'historiques')
+                                                        .doc(user.uid)
+                                                        .set({
+                                                      'date': ' ',
+                                                      'heure': '',
+                                                      'intervention': false
+                                                    }));
                                                 // ignore: use_build_context_synchronously
                                                 Navigator.pushReplacement(
                                                     context,
@@ -405,7 +428,7 @@ class _FirstLandingState extends State<FirstLanding> {
                                       ),
                                     ),
                                   ),
-              
+
                             // LOGIN BUTTON
                             Center(
                               child: TextButton(
@@ -418,10 +441,10 @@ class _FirstLandingState extends State<FirstLanding> {
                                 },
                                 child: const Text("Vous avez déja un compte?",
                                     style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Sfpro',
-                                        color: Color(0xff00366f),
-                                        )),
+                                      fontSize: 15,
+                                      fontFamily: 'Sfpro',
+                                      color: Color(0xff00366f),
+                                    )),
                               ),
                             )
                           ],

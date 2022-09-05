@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Container(
-                    height: height * 0.5,
+                    height: height * 0.57,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
@@ -136,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Tel: ${tel!}',
+                                              'Tél: ${tel!}',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Sfpro',
@@ -175,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(2),
                                       child: Text(
                                         adresse!,
                                         textAlign: TextAlign.center,
@@ -187,7 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(14),
+                                      padding: const EdgeInsets.all(10),
                                       child: Container(
                                         width:
                                             MediaQuery.of(context).size.width /

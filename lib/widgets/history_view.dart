@@ -64,7 +64,7 @@ class _HistoryViewState extends State<HistoryView> {
                     stream: FirebaseFirestore.instance
                         .collection('users')
                         .doc(user!.uid)
-                        .collection('historiques')
+                        .collection('historiques').where('date',isNotEqualTo: ' ')
                         .snapshots()
                         .asBroadcastStream(),
                     builder: ((BuildContext context,
@@ -91,7 +91,7 @@ class _HistoryViewState extends State<HistoryView> {
                             !query.toLowerCase().contains('avec') &&
                             !query.toLowerCase().contains('sans')) {
                           return Center(
-                            child: Text('No search found'),
+                            child: Text("Aucun résultat trouvé !"),
                           );
                         } else {
                           return ListView(

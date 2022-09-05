@@ -40,7 +40,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           elevation: 0,
           backgroundColor: Colors.transparent,
           title: const Text(
-            "Verfication",
+            "Vérification",
             style: TextStyle(color: Color(0xff00366f), fontFamily: 'Sfpro'),
           ),
           iconTheme: const IconThemeData(color: Color(0xff00366f)),

@@ -27,10 +27,13 @@ class _HistoriqueUserState extends State<HistoriqueUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Historique',style: TextStyle(color: Colors.black,fontFamily: 'Sfpro'),),
-        backgroundColor: Colors.transparent,
+        title: Text('Historique',style: TextStyle(fontFamily: 'Sfpro'),),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: const [Color(0xff00366f),Color(0xffd51b33)],stops: const [0.1,0.9])
+          ),
+        ),
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
