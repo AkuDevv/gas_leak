@@ -108,7 +108,7 @@ class _FirstLandingState extends State<FirstLanding> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: ListView(
+                        child: Column(
                           children: <Widget>[
                             const SizedBox(
                               height: 20,
@@ -388,8 +388,8 @@ class _FirstLandingState extends State<FirstLanding> {
                                                   'tel': telController.text,
                                                   'adresse':
                                                       adresseController.text,
-                                                  'latitude': 0,
-                                                  'longitude': 0,
+                                                  'latitude': 1.1,
+                                                  'longitude': 1.1,
                                                   'photo': "",
                                                   'uid': user.uid,
                                                   'provider': "EMAIL",
@@ -433,11 +433,7 @@ class _FirstLandingState extends State<FirstLanding> {
                             Center(
                               child: TextButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginScreen()));
+                                  Navigator.pop(context);
                                 },
                                 child: const Text("Vous avez déja un compte?",
                                     style: TextStyle(

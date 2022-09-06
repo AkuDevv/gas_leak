@@ -71,28 +71,25 @@ class _changePasswordState extends State<changePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: const [Color(0xff00366f), Color(0xffd51b33)], stops: const [0.3,0.9])),
+        ),
+        elevation: 0,
+        title: Text(
+          "Modifier le mot de passe",
+          style: TextStyle(
+            fontFamily: 'Sfpro',
+            fontSize: 20,
+          ),
+        ),
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: const [Color(0xff00366f),Color(0xffd51b33)],
-                      stops: const [0.2, 0.9])),
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                title: Text(
-                  "Modifier le mot de passe",
-                  style: TextStyle(
-                    fontFamily: 'Sfpro',
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.only(top: 50.0),
               child: Center(
@@ -207,7 +204,7 @@ class _changePasswordState extends State<changePassword> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     gradient: LinearGradient(
-                        colors: const [Color(0xff00366f),Color(0xffd51b33)],
+                        colors: const [Color(0xff00366f), Color(0xffd51b33)],
                         stops: const [0.1, 0.9])),
                 // ignore: deprecated_member_use
                 child: RaisedButton(

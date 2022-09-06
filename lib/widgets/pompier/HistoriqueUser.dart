@@ -73,7 +73,7 @@ class _HistoriqueUserState extends State<HistoriqueUser> {
                     stream: FirebaseFirestore.instance
                         .collection('users')
                         .doc(widget.uid)
-                        .collection('historiques')
+                        .collection('historiques').where('date',isNotEqualTo: " ")
                         .snapshots()
                         .asBroadcastStream(),
                     builder: ((BuildContext context,

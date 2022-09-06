@@ -21,7 +21,7 @@ class TabBarWidget extends StatelessWidget {
           appBar: AppBar(
             actions: [
               Padding(
-                padding: const EdgeInsets.only(right:15.0,top: 5),
+                padding: const EdgeInsets.only(right: 15.0, top: 5),
                 child: IconButton(
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
@@ -52,6 +52,13 @@ class TabBarWidget extends StatelessWidget {
               ),
             ),
             bottom: TabBar(
+              onTap: (int value) {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+              },
               isScrollable: true,
               indicatorColor: Colors.white,
               indicatorWeight: 5,

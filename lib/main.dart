@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gas_leak_safety/widgets/HomePage.dart';
 import 'package:gas_leak_safety/widgets/signIn.dart';
 import 'package:gas_leak_safety/widgets/started.dart';
 import 'package:gas_leak_safety/widgets/verify_email.dart';
@@ -15,7 +16,7 @@ void main() async {
   setupLocator();
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: GettingStarted(),
+    home: MainPage(),
   ));
 }
 
@@ -31,11 +32,11 @@ class MainPage extends StatelessWidget {
           if(snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator(),);
           } else if(snapshot.hasData) {
-            return const VerifyEmailScreen();
+            return const HomePage();
           } else if(snapshot.hasError) {
             return const Center(child: Text("Something went wrong"),);
           } else {
-            return const SignInMethodScreen();
+            return const GettingStarted();
           }
         },
       ),

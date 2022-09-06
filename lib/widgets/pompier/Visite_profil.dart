@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import 'HistoriqueUser.dart';
 
@@ -20,8 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? tel = "";
   String? adresse = "";
   String? email = "";
-  double? longitude = 0;
-  double? latitude = 0;
+  double? longitude = 1.1;
+  double? latitude = 1.1;
 
   Future _getUserFromFirebase() async {
     await FirebaseFirestore.instance
@@ -53,201 +54,113 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Scaffold(
-          body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15,right: 15,top: 50,bottom: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // ignore: prefer_const_literals_to_create_immutables
+    return Scaffold(
+        body: CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Text(
+            fname!,
+            style: TextStyle(fontFamily: 'Sfpro'),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          flexibleSpace: Container(
+            height: height * 0.5,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(20)),
+                //color: Colors.grey,
+                gradient: RadialGradient(
+                    center: Alignment.topLeft,
+                    radius: 1.8,
+                    colors: const [Color(0xff00366f), Color(0xffd51b33)],
+                    stops: const [0.1, 0.9])),
+            child: Padding(
+              padding: EdgeInsets.only(top: 80, left: 30, right: 30),
+              child: ListView(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(
-                        onPressed:(){ Navigator.pop(context);},
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black,
-                        ),
+                      Text(
+                        'Tél: ' + tel!,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Sfpro',
+                            fontSize: 18),
+                      ),
+                      Text(
+                        'CIN: ' + cin!,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Sfpro',
+                            fontSize: 18),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  fname!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 34,
-                    fontFamily: 'Sfpro',
-                  ),
-                ),
-                SizedBox(
-                  height: 22,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Container(
-                    height: height * 0.57,
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        double innerHeight = constraints.maxHeight;
-                        double innerWidth = constraints.maxWidth;
-                        return Stack(
-                          fit: StackFit.passthrough,
-                          children: [
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                height: innerHeight * 0.8,
-                                width: innerWidth,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.grey,
-                                ),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 100,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Text(
-                                        email!,
-                                        style: TextStyle(
-                                          fontFamily: 'Sfpro',
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'Tél: ${tel!}',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Sfpro',
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 25,
-                                            vertical: 0,
-                                          ),
-                                          child: Container(
-                                            height: 40,
-                                            width: 3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'CIN: ${cin!}',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Sfpro',
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2),
-                                      child: Text(
-                                        adresse!,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.grey[700],
-                                          fontFamily: 'Sfpro',
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: TextButton(
-                                          child: Text(
-                                            'Historique',
-                                            style: TextStyle(
-                                              color: Colors.grey[700],
-                                              fontFamily: 'Sfpro',
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: ((context) =>
-                                                        HistoriqueUser(
-                                                            uid: widget.uid))));
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/images/profile.png',
-                                  width: innerWidth * 0.45,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: Center(
+                      child: Text(
+                        adresse!,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Sfpro',
+                            fontSize: 18),
+                      ),
                     ),
                   ),
-                ),
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 30,
-                ),
-                (longitude! == 0 || latitude! == 0)
-                    ? CircularProgressIndicator()
-                    : Container(
-                        height: 750,
-                        width: width,
-                        child: GoogleMap(
+                  Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      HistoriqueUser(uid: widget.uid)));
+                        },
+                        child: GradientText(
+                          'Historique',
+                          colors: const [Color(0xff00366f), Color(0xffd51b33)],
+                          style: TextStyle(
+                              //color: Color(0xff00366f),
+                              fontFamily: 'Sfpro',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          pinned: true,
+          expandedHeight: height * 0.4,
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate([
+            Container(
+              height: height,
+              width: width,
+              child: (longitude! == 1.1)
+                  ? Padding(
+                      padding: EdgeInsets.all(30),
+                      child: Text(
+                        "Utilisateur n'a pas autorisé l'accès à son emplacement",
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : Stack(
+                      children: [
+                        GoogleMap(
                             initialCameraPosition: CameraPosition(
                                 target: LatLng(latitude!, longitude!),
                                 zoom: 14.5),
@@ -255,12 +168,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Marker(
                                   markerId: const MarkerId('Position'),
                                   position: LatLng(latitude!, longitude!))
-                            })),
-              ],
+                            }),
+
+                        //color: Colors.grey,
+                      ],
+                    ),
             ),
-          ),
-        )
+          ]),
+        ),
       ],
-    );
+    ));
   }
 }

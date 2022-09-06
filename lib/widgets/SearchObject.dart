@@ -19,6 +19,9 @@ class _SearchObjectState extends State<SearchObject> {
     return Card(
       elevation: 20,
       child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [Colors.white,(widget.intervention =="Sans intervention")?Color.fromARGB(255, 99, 7, 0):Color.fromARGB(255, 0, 110, 6)],stops: [0.95,1])
+        ),
         height: 70,
         width: MediaQuery.of(context).size.width*0.8,
         child: Column(

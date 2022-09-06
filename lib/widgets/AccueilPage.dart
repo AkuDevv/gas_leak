@@ -21,7 +21,6 @@ class _AccueilPageState extends State<AccueilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          drawer: const NavBar(currentPage: 'Accueil'),
           body: Container(
             height: MediaQuery.of(context).size.height,
             child: Padding(
