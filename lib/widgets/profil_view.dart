@@ -32,8 +32,8 @@ class _ProfileViewState extends State<ProfileView> {
 
   User? user = FirebaseAuth.instance.currentUser;
 
-  double? longitude = 0;
-  double? latitude = 0;
+  double? longitude = 1.1;
+  double? latitude = 1.1;
   bool acceptedLocation = false;
   bool? loading = false;
 
@@ -285,8 +285,8 @@ class _ProfileViewState extends State<ProfileView> {
                                   'photo': "",
                                   'uid': user!.uid,
                                   'provider': "EMAIL",
-                                  'latitude': latitude == 0 ? 0 : latitude,
-                                  'longitude': longitude == 0 ? 0 : longitude,
+                                  'latitude': latitude == 1.1 ? 1.1 : latitude,
+                                  'longitude': longitude == 1.1 ? 1.1 : longitude,
                                 });
                               }
                             }),
@@ -340,8 +340,8 @@ class _ProfileViewState extends State<ProfileView> {
                                 'photo': "",
                                 'uid': user!.uid,
                                 'provider': "EMAIL",
-                                'latitude': latitude == 0 ? 0 : latitude,
-                                'longitude': longitude == 0 ? 0 : longitude,
+                                'latitude': latitude == 1.1 ? 1.1 : latitude,
+                                'longitude': longitude == 1.1 ? 1.1 : longitude,
                               }).then((value) => showDialog<String>(
                                         context: context,
                                         builder: (BuildContext context) =>

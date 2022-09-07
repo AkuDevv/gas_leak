@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 
 import 'HistoriqueUser.dart';
 
@@ -58,6 +60,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: CustomScrollView(
       slivers: [
         SliverAppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right : 25.0),
+              child: IconButton(icon: Icon(Icons.arrow_downward),
+              onPressed: () {
+                
+              },),
+            )
+          ],
           title: Text(
             fname!,
             style: TextStyle(fontFamily: 'Sfpro'),
@@ -66,15 +77,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           flexibleSpace: Container(
-            height: height * 0.5,
+            height: height * 0.4,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                /*borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(20)),
+                    bottomRight: Radius.circular(20)),*/
                 //color: Colors.grey,
                 gradient: RadialGradient(
                     center: Alignment.topLeft,
-                    radius: 1.8,
+                    radius: 1,
                     colors: const [Color(0xff00366f), Color(0xffd51b33)],
                     stops: const [0.1, 0.9])),
             child: Padding(
@@ -85,14 +96,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Tél: ' + tel!,
+                        'Tél: ${tel!}',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Sfpro',
                             fontSize: 18),
                       ),
                       Text(
-                        'CIN: ' + cin!,
+                        'CIN: ${cin!}',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Sfpro',
@@ -105,6 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Center(
                       child: Text(
                         adresse!,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Sfpro',
@@ -113,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 50),
+                    padding: EdgeInsets.only(top: 20),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -143,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           pinned: true,
-          expandedHeight: height * 0.4,
+          expandedHeight: height * 0.3,
         ),
         SliverList(
           delegate: SliverChildListDelegate([
@@ -151,16 +163,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: height,
               width: width,
               child: (longitude! == 1.1)
-                  ? Padding(
-                      padding: EdgeInsets.all(30),
-                      child: Text(
-                        "Utilisateur n'a pas autorisé l'accès à son emplacement",
-                        textAlign: TextAlign.center,
-                      ),
+                  ? Stack(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(40),
+                          child: Text(
+                            "Utilisateur n'a pas autorisé l'accès à son emplacement",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20)),
+                              color: Color(0xffd51b33),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   : Stack(
                       children: [
                         GoogleMap(
+                            myLocationButtonEnabled: true,
+                            trafficEnabled: true,
                             initialCameraPosition: CameraPosition(
                                 target: LatLng(latitude!, longitude!),
                                 zoom: 14.5),
@@ -168,9 +197,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Marker(
                                   markerId: const MarkerId('Position'),
                                   position: LatLng(latitude!, longitude!))
-                            }),
-
-                        //color: Colors.grey,
+                            },
+                            zoomControlsEnabled: false,
+                            zoomGesturesEnabled: true,
+                            gestureRecognizers: < Factory < OneSequenceGestureRecognizer >> [
+                              new Factory < OneSequenceGestureRecognizer > (
+                              () => new EagerGestureRecognizer(),
+                              ),
+                              ].toSet()
+                            ),
+                        SizedBox(
+                          height: 20,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20)),
+                              color: Color(0xffd51b33),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
             ),

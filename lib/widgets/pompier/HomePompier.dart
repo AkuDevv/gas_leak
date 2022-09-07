@@ -65,7 +65,7 @@ class _HomePompierState extends State<HomePompier> {
                     }
                   },
                   decoration: InputDecoration(
-                      labelText: "Search",
+                      labelText: "Rechercher",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                           borderRadius:
@@ -90,7 +90,7 @@ class _HomePompierState extends State<HomePompier> {
                                 element['tel'].toString().contains(query))
                             .isEmpty) {
                           return Center(
-                            child: Text('No search found'),
+                            child: Text('Aucun résultat trouvé'),
                           );
                         } else {
                           return ListView(
