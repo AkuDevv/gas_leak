@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/started.dart';
+import 'package:gas_leak_safety/widgets/client/started.dart';
 
 class TabBarWidget extends StatelessWidget {
   final String title;
@@ -23,13 +23,31 @@ class TabBarWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, top: 5),
                 child: IconButton(
-                  onPressed: () async {
-                    await FirebaseAuth.instance.signOut();
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const GettingStarted()),
-                        (route) => false);
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              title: Text('Se déconnecter'),
+                              content: Text('Vous voulez vous déconnecter?'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Annuler')),
+                                TextButton(
+                                    onPressed: () async {
+                                      await FirebaseAuth.instance.signOut();
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const GettingStarted()),
+                                          (route) => false);
+                                    },
+                                    child: Text('OK')),
+                              ],
+                            ));
                   },
                   icon: const Icon(Icons.logout),
                 ),

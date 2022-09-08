@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/SearchObject.dart';
+import 'package:gas_leak_safety/widgets/client/SearchObject.dart';
 
 class HistoriqueUser extends StatefulWidget {
   final String uid;
@@ -27,11 +26,15 @@ class _HistoriqueUserState extends State<HistoriqueUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Historique',style: TextStyle(fontFamily: 'Sfpro'),),
+        title: Text(
+          'Historique',
+          style: TextStyle(fontFamily: 'Sfpro'),
+        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: const [Color(0xff00366f),Color(0xffd51b33)],stops: const [0.1,0.9])
-          ),
+              gradient: LinearGradient(
+                  colors: const [Color(0xff00366f), Color(0xffd51b33)],
+                  stops: const [0.1, 0.9])),
         ),
         elevation: 0,
       ),
@@ -50,17 +53,16 @@ class _HistoriqueUserState extends State<HistoriqueUser> {
                         query = value;
                         if (value == 'avec') {
                           test = "true";
-                        } else if(value == 'sans'){
+                        } else if (value == 'sans') {
                           test = "false";
-                        }
-                        else {
+                        } else {
                           test = " ";
                         }
                       });
                     }
                   },
                   decoration: InputDecoration(
-                      iconColor : Colors.blueAccent,
+                      iconColor: Colors.blueAccent,
                       hintText: "Rechercher/Filtrer",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
@@ -73,7 +75,8 @@ class _HistoriqueUserState extends State<HistoriqueUser> {
                     stream: FirebaseFirestore.instance
                         .collection('users')
                         .doc(widget.uid)
-                        .collection('historiques').where('date',isNotEqualTo: " ")
+                        .collection('historiques')
+                        .where('date', isNotEqualTo: " ")
                         .snapshots()
                         .asBroadcastStream(),
                     builder: ((BuildContext context,

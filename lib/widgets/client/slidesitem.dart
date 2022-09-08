@@ -30,7 +30,7 @@ class SlideItem extends StatelessWidget {
               height: 18,
             ),
             GradientText(
-              colors:[Color(0xff00366f),Color(0xffd51b33)],
+              colors: [Color(0xff00366f), Color(0xffd51b33)],
               slideList[index].title,
               style: const TextStyle(
                 fontSize: 22,
@@ -44,10 +44,9 @@ class SlideItem extends StatelessWidget {
                 slideList[index].description,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Sfpro',
-                  color: Color.fromARGB(255, 42, 58, 66)
-                ),
+                    fontSize: 16,
+                    fontFamily: 'Sfpro',
+                    color: Color.fromARGB(255, 42, 58, 66)),
               ),
             ),
           ],

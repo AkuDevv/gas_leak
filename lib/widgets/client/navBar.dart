@@ -2,15 +2,14 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/HistoriquePage.dart';
-import 'package:gas_leak_safety/widgets/HomePage.dart';
-import 'package:gas_leak_safety/widgets/login_email_password.dart';
+import 'package:gas_leak_safety/widgets/client/HistoriquePage.dart';
+import 'package:gas_leak_safety/widgets/client/HomePage.dart';
+import 'package:gas_leak_safety/widgets/client/login_email_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NavBar extends StatefulWidget {
-
   final String currentPage;
-  const NavBar({Key? key,required this.currentPage}) : super(key: key);
+  const NavBar({Key? key, required this.currentPage}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -78,31 +77,27 @@ class _NavBarState extends State<NavBar> {
                 ),
           ),
           ListTile(
-            iconColor: Color(0xff00366f),
-            textColor: Color(0xff00366f),
-            leading: Icon(Icons.home),
-            title: Text('Accueil'),
-            onTap: () {
-              if(widget.currentPage == "Accueil"){
-                Navigator.of(context).pop();
-              }
-              else{
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage()));
-              }
-            }
-          ),
+              iconColor: Color(0xff00366f),
+              textColor: Color(0xff00366f),
+              leading: Icon(Icons.home),
+              title: Text('Accueil'),
+              onTap: () {
+                if (widget.currentPage == "Accueil") {
+                  Navigator.of(context).pop();
+                } else {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                }
+              }),
           ListTile(
             iconColor: Color(0xff00366f),
             textColor: Color(0xff00366f),
             leading: Icon(Icons.person),
             title: Text('Profil'),
             onTap: () {
-              if(widget.currentPage == "Profil"){
+              if (widget.currentPage == "Profil") {
                 Navigator.of(context).pop();
-              }
-              else{
-                
-              }
+              } else {}
             },
           ),
           ListTile(
@@ -111,11 +106,11 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.history),
             title: Text('Historique'),
             onTap: () {
-              if(widget.currentPage == "Historique"){
+              if (widget.currentPage == "Historique") {
                 Navigator.of(context).pop();
-              }
-              else{
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HistoriquePage()));
+              } else {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HistoriquePage()));
               }
             },
           ),

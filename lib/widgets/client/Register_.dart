@@ -3,13 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gas_leak_safety/widgets/login_email_password.dart';
-import 'package:gas_leak_safety/widgets/signIn.dart';
 import 'package:gas_leak_safety/widgets/verify_email.dart';
 import 'package:gas_leak_safety/services/auth_service.dart';
-
-import 'signIn.dart';
-import 'verify_email.dart';
 
 class FirstLanding extends StatefulWidget {
   const FirstLanding({Key? key}) : super(key: key);

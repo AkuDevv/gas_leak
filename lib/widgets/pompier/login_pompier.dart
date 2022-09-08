@@ -17,8 +17,16 @@ class _LoginPompierState extends State<LoginPompier> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(' '),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(
+          color: Color(0xff00366f),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 140, left: 30, right: 30),
+        padding: const EdgeInsets.only(top: 80, left: 30, right: 30),
         child: Form(
           key: _formkey,
           child: Column(
@@ -58,18 +66,15 @@ class _LoginPompierState extends State<LoginPompier> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      gradient: const LinearGradient(colors: [
-                        Color(0xff00366f),Color(0xffd51b33)
-                      ], stops: [
-                        0.4,
-                        0.8
-                      ])),
+                      gradient: const LinearGradient(
+                          colors: [Color(0xff00366f), Color(0xffd51b33)],
+                          stops: [0.4, 0.8])),
                   child: TextButton(
                     onPressed: () {
                       if (!_formkey.currentState!.validate()) {
                         return;
                       }
-                      if (matriculeController.text == 'siham0000') {
+                      if (matriculeController.text == 'gas_leak_safety_0000') {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

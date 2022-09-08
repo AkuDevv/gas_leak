@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/HomePage.dart';
-import 'package:gas_leak_safety/widgets/signIn.dart';
-import 'package:gas_leak_safety/widgets/started.dart';
-import 'package:gas_leak_safety/widgets/verify_email.dart';
+import 'package:gas_leak_safety/widgets/client/HomePage.dart';
+import 'package:gas_leak_safety/widgets/client/started.dart';
 import 'package:gas_leak_safety/services/services_locator.dart';
 import 'services/firebase_options.dart';
 
@@ -29,12 +27,16 @@ class MainPage extends StatelessWidget {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(),);
-          } else if(snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasData) {
             return const HomePage();
-          } else if(snapshot.hasError) {
-            return const Center(child: Text("Something went wrong"),);
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text("Veuillez verifier votre connexion!"),
+            );
           } else {
             return const GettingStarted();
           }

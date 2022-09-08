@@ -3,10 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gas_leak_safety/widgets/login_email_password.dart';
-import 'package:gas_leak_safety/widgets/profil_view.dart';
-import 'login_email_password.dart';
-import 'profil_view.dart';
+import 'package:gas_leak_safety/widgets/client/login_email_password.dart';
 
 // ignore: camel_case_types
 class changePassword extends StatefulWidget {
@@ -75,7 +72,8 @@ class _changePasswordState extends State<changePassword> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: const [Color(0xff00366f), Color(0xffd51b33)], stops: const [0.3,0.9])),
+                  colors: const [Color(0xff00366f), Color(0xffd51b33)],
+                  stops: const [0.3, 0.9])),
         ),
         elevation: 0,
         title: Text(
@@ -207,11 +205,7 @@ class _changePasswordState extends State<changePassword> {
                         colors: const [Color(0xff00366f), Color(0xffd51b33)],
                         stops: const [0.1, 0.9])),
                 // ignore: deprecated_member_use
-                child: RaisedButton(
-                    color: Colors.transparent,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
+                child: TextButton(
                     onPressed: () async {
                       final docRef = FirebaseFirestore.instance
                           .collection('users')

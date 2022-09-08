@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/navBar.dart';
+import 'package:gas_leak_safety/widgets/client/navBar.dart';
 
 class HistoriquePage extends StatefulWidget {
   HistoriquePage({Key? key}) : super(key: key);
@@ -12,7 +12,9 @@ class _HistoriquePageState extends State<HistoriquePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavBar(currentPage: 'Historique',),
+      drawer: const NavBar(
+        currentPage: 'Historique',
+      ),
       body: Padding(
         padding: const EdgeInsets.all(5),
         child: ListView(

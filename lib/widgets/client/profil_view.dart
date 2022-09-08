@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gas_leak_safety/widgets/changePassword.dart';
+import 'package:gas_leak_safety/widgets/client/changePassword.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:load_switch/load_switch.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -286,7 +286,8 @@ class _ProfileViewState extends State<ProfileView> {
                                   'uid': user!.uid,
                                   'provider': "EMAIL",
                                   'latitude': latitude == 1.1 ? 1.1 : latitude,
-                                  'longitude': longitude == 1.1 ? 1.1 : longitude,
+                                  'longitude':
+                                      longitude == 1.1 ? 1.1 : longitude,
                                 });
                               }
                             }),
@@ -308,11 +309,7 @@ class _ProfileViewState extends State<ProfileView> {
                           ])),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.06,
-                      child: RaisedButton(
-                          color: Colors.transparent,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
+                      child: TextButton(
                           onPressed: () async {
                             if (!_formkey.currentState!.validate() == true) {
                               return;

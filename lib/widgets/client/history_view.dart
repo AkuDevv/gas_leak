@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/SearchObject.dart';
+import 'package:gas_leak_safety/widgets/client/SearchObject.dart';
 
 class HistoryView extends StatefulWidget {
   const HistoryView({Key? key}) : super(key: key);
@@ -41,17 +41,16 @@ class _HistoryViewState extends State<HistoryView> {
                         query = value;
                         if (value == 'avec') {
                           test = "true";
-                        } else if(value == 'sans'){
+                        } else if (value == 'sans') {
                           test = "false";
-                        }
-                        else {
+                        } else {
                           test = " ";
                         }
                       });
                     }
                   },
                   decoration: InputDecoration(
-                      iconColor : Colors.blueAccent,
+                      iconColor: Colors.blueAccent,
                       hintText: "Rechercher/Filtrer",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
@@ -64,7 +63,8 @@ class _HistoryViewState extends State<HistoryView> {
                     stream: FirebaseFirestore.instance
                         .collection('users')
                         .doc(user!.uid)
-                        .collection('historiques').where('date',isNotEqualTo: ' ')
+                        .collection('historiques')
+                        .where('date', isNotEqualTo: ' ')
                         .snapshots()
                         .asBroadcastStream(),
                     builder: ((BuildContext context,

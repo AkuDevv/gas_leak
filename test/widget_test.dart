@@ -8,8 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:gas_leak_safety/main.dart';
-import 'package:gas_leak_safety/widgets/signIn.dart';
+import 'package:gas_leak_safety/widgets/client/signIn.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

@@ -25,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? email = "";
   double? longitude = 1.1;
   double? latitude = 1.1;
+  bool isCollapsed = false;
 
   Future _getUserFromFirebase() async {
     await FirebaseFirestore.instance
@@ -61,13 +62,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       slivers: [
         SliverAppBar(
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right : 25.0),
-              child: IconButton(icon: Icon(Icons.arrow_downward),
-              onPressed: () {
-                
-              },),
-            )
+            (isCollapsed == false)
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 25.0),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_upward),
+                      onPressed: () {
+                        setState(() {
+                          isCollapsed = true;
+                        });
+                      },
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(right: 25.0),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_downward),
+                      onPressed: () {
+                        setState(() {
+                          isCollapsed = false;
+                        });
+                      },
+                    ),
+                  )
           ],
           title: Text(
             fname!,
@@ -77,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           flexibleSpace: Container(
-            height: height * 0.4,
+            height: height * 0.5,
             decoration: BoxDecoration(
                 /*borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
@@ -85,9 +102,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //color: Colors.grey,
                 gradient: RadialGradient(
                     center: Alignment.topLeft,
-                    radius: 1,
+                    radius: 0.7,
                     colors: const [Color(0xff00366f), Color(0xffd51b33)],
-                    stops: const [0.1, 0.9])),
+                    stops: const [0.5, 0.5])),
             child: Padding(
               padding: EdgeInsets.only(top: 80, left: 30, right: 30),
               child: ListView(
@@ -155,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           pinned: true,
-          expandedHeight: height * 0.3,
+          expandedHeight: (isCollapsed == false) ? height * 0.35 : height * 0,
         ),
         SliverList(
           delegate: SliverChildListDelegate([
@@ -200,14 +217,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                             zoomControlsEnabled: false,
                             zoomGesturesEnabled: true,
-                            gestureRecognizers: < Factory < OneSequenceGestureRecognizer >> [
-                              new Factory < OneSequenceGestureRecognizer > (
-                              () => new EagerGestureRecognizer(),
+                            gestureRecognizers:
+                                <Factory<OneSequenceGestureRecognizer>>[
+                              new Factory<OneSequenceGestureRecognizer>(
+                                () => new EagerGestureRecognizer(),
                               ),
-                              ].toSet()
-                            ),
+                            ].toSet()),
                         SizedBox(
-                          height: 20,
+                          height: (isCollapsed == false) ? 20 : 10,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:gas_leak_safety/models/slide.dart';
-import 'package:gas_leak_safety/widgets/login_email_password.dart';
+import 'package:gas_leak_safety/widgets/client/login_email_password.dart';
 import 'package:gas_leak_safety/widgets/pompier/login_pompier.dart';
-import 'package:gas_leak_safety/widgets/slidesitem.dart';
+import 'package:gas_leak_safety/widgets/client/slidesitem.dart';
 
 class GettingStarted extends StatefulWidget {
   const GettingStarted({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _GettingStartedState extends State<GettingStarted> {
       decoration: BoxDecoration(
         gradient: isActive
             ? /*Color(0xff326789)*/ LinearGradient(
-                colors: const [Color(0xff00366f),Color(0xffd51b33)],
+                colors: const [Color(0xff00366f), Color(0xffd51b33)],
                 stops: const [0.1, 0.9])
             : LinearGradient(colors: const [Colors.grey, Colors.blueGrey]),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -81,28 +81,25 @@ class _GettingStartedState extends State<GettingStarted> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         gradient: LinearGradient(colors: const [
-                          Color(0xff00366f),Color(0xffd51b33)
+                          Color(0xff00366f),
+                          Color(0xffd51b33)
                         ], stops: const [
                           0.1,
                           0.9
                         ])),
-                    child: FlatButton(
+                    child: TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginScreen()));
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      color: Colors.transparent,
-                      textColor: Colors.white,
                       child: const Text(
                         'Rejoinez nous!',
                         style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Sfpro',
-                        ),
+                            fontSize: 15,
+                            fontFamily: 'Sfpro',
+                            color: Colors.white),
                       ),
                     ),
                   ),
@@ -117,12 +114,12 @@ class _GettingStartedState extends State<GettingStarted> {
                           color: Color(0xff00366f),
                         ),
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPompier()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPompier()));
                         },
                         child: Text(
                           'Se connecter',

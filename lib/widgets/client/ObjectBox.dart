@@ -2,58 +2,65 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ObjectBox extends StatelessWidget {
-
   final String assetPath;
   final String title;
 
-  const ObjectBox({Key? key, required  this.assetPath,required  this.title}) : super(key: key);
-  
+  const ObjectBox({Key? key, required this.assetPath, required this.title})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,bottom: 6),
-            child: Card(
-              
-              elevation: 10,
-              //color: Colors.lightBlueAccent,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              
-              child: InkWell(
-              onTap: () {
-                
-              },
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-               // width: 260,
-                height: 90,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                      Container(
-                       height: 90,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(fit: BoxFit.cover,image: AssetImage(assetPath), ),
-                         borderRadius: BorderRadius.circular(15),
-                        ),
+    return Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 6),
+        child: Card(
+          elevation: 10,
+          //color: Colors.lightBlueAccent,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
 
-                        child:  Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Padding(
-                          padding: const EdgeInsets.only(left:20.0,bottom: 15),
-                          child: AutoSizeText(title,maxLines: 1,minFontSize: 16,overflow: TextOverflow.ellipsis,
-                          style:  TextStyle(color: Colors.white,fontSize: 19,fontFamily: 'Sfpro',fontWeight: FontWeight.bold),),
-                                              ),
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
+              // width: 260,
+              height: 90,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    height: 90,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(assetPath),
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0, bottom: 15),
+                        child: AutoSizeText(
+                          title,
+                          maxLines: 1,
+                          minFontSize: 16,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 19,
+                              fontFamily: 'Sfpro',
+                              fontWeight: FontWeight.bold),
                         ),
-                        ),
-                     
-                      
-                  ],
-                ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          )
-         ) ;
+          ),
+        ));
   }
 }
 /*

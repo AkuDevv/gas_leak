@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_leak_safety/widgets/HomePage.dart';
+import 'package:gas_leak_safety/widgets/client/HomePage.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({Key? key}) : super(key: key);
@@ -47,14 +47,20 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           centerTitle: true,
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 150,left: 20,right: 20),
+          padding: const EdgeInsets.only(top: 150, left: 20, right: 20),
           child: Column(
             children: [
               const CircularProgressIndicator(
                 color: Color(0xff00366f),
               ),
-              const SizedBox(height: 15,),
-              Center(child: Text("Veuillez consulter votre boite mail/spam: ${user!.email}",textAlign: TextAlign.center,))
+              const SizedBox(
+                height: 15,
+              ),
+              Center(
+                  child: Text(
+                "Veuillez consulter votre boite mail/spam: ${user!.email}",
+                textAlign: TextAlign.center,
+              ))
             ],
           ),
         ));
