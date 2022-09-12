@@ -1,11 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gas_leak_safety/widgets/client/HomepageItem.dart';
 
 class ObjectBox extends StatelessWidget {
   final String assetPath;
   final String title;
+  final String item;
 
-  const ObjectBox({Key? key, required this.assetPath, required this.title})
+  const ObjectBox(
+      {Key? key,
+      required this.assetPath,
+      required this.title,
+      required this.item})
       : super(key: key);
 
   @override
@@ -19,7 +25,13 @@ class ObjectBox extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
 
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomepageItem(title: item),
+                  ));
+            },
             child: Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),

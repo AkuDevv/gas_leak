@@ -64,18 +64,22 @@ class _AccueilPageState extends State<AccueilPage> {
                     ObjectBox(
                       title: 'Maintenance',
                       assetPath: 'assets/images/maintenance.png',
+                      item: "Maintenance",
                     ),
                     ObjectBox(
                       title: 'Consultation',
                       assetPath: 'assets/images/consulter.jpg',
+                      item: "Consultation",
                     ),
                     ObjectBox(
                       title: 'Nos services',
                       assetPath: 'assets/images/serv.jpg',
+                      item: "Services",
                     ),
                     ObjectBox(
                       title: "Conseils d'utilisation",
                       assetPath: 'assets/images/conseils.jpg',
+                      item: "Conseils",
                     ),
                   ],
                 ),
