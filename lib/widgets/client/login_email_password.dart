@@ -184,7 +184,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 15,
                         fontFamily: 'Sfpro',
                         color: Color(0xff00366f)),
-                  ))
+                  )),
+              Padding(
+                padding: EdgeInsets.only(top : MediaQuery.of(context).size.height/8),
+                child: Center(
+                  child: const Text('Développé par IbtikarCom',
+                      style: TextStyle(
+                          color: Color(0xff00366f),
+                          fontFamily: 'Sfpro',
+                          fontSize: 14)),
+                ),
+              )
             ],
           ),
         ),

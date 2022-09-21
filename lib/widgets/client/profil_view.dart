@@ -395,9 +395,15 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(message),
-                  ),
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Center(
+                      child: const Text('Développé par IbtikarCom',
+                          style: TextStyle(
+                              color: Color(0xff00366f),
+                              fontFamily: 'Sfpro',
+                              fontSize: 13)),
+                    ),
+                  )
                 ],
               ),
             ),
